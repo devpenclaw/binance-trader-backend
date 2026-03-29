@@ -1,0 +1,13 @@
+{
+  "mode": "sandbox",
+  "apiKey": "",
+  "apiSecret": "",
+  "testnet": true,
+  "pairs": ["BTCUSDT", "ETHUSDT", "SOLUSDT"],
+  "initialCapital": 100,
+  "tradeAmountPercent": 10,
+  "stopLossPercent": 2,
+  "takeProfitPercent": 3,
+  "strategy": "rsi_macd",
+  "autoStart": false
+}
