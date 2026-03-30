@@ -472,6 +472,24 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: Date.now() });
 });
 
+// Get market analysis for all pairs
+app.get('/api/analysis', async (req, res) => {
+  const results = {};
+  for (const pair of config.pairs) {
+    results[pair] = await analyzeMarket(pair);
+    await new Promise(r => setTimeout(r, 500)); // Rate limit
+  }
+  lastAnalysis = results;
+  res.json(results);
+});
+
+// Get analysis for single pair
+app.get('/api/analysis/:pair', async (req, res) => {
+  const { pair } = req.params;
+  const result = await analyzeMarket(pair);
+  res.json(result);
+});
+
 // Start server
 const PORT = process.env.PORT || 3001;
 const server = app.listen(PORT, () => {
